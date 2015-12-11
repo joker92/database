@@ -1,0 +1,232 @@
+dper visualizzare le tabelle 
+
+describe provincia;
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+estrarre nome densita abitativa da provincia ordinate per densita abitativa , arrotondate di 2 cifre
+
+select nome, round (abitanti/superficie,2)from provincia order by abitanti/superficie, 2 asc;
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+per estrarre una sigla tipo torino (to) si fa 
+
+select  concat (nome, '(',sigla,')')from provincia;
+
+
+-----------------------------------------------------------------------------------------------------------------
+per estrarre stringe di nomi e cognome da una tabella 
+
+select concat ("il sing. ",left(nome,1)," ",cognome) from utente ;
+
+-----------------------------------------------------------------------------------------------------------------
+per estrarre le date di nascita di un utente in una tabella 
+
+select concat_ws (" ","il sig.",left(nome,1),cognome,data_nascita) from utente ;
+
+-----------------------------------------------------------------------------------------------------------------
+per avvicinare il nome puntato es giorigio(g.) il comando è : concat(left(nome,1),".")
+
+
+select concat_ws(" ","il sig.",concat(left(nome,1),"."),cognome,data_nascita) from utente ;
+
+-----------------------------------------------------------------------------------------------------------------
+per mettere laprima lettera maiuscola e tutte le altre minuscole utilizzare :( SUBSTRING(descrizione,2)
+
+select concat( upper(left(descrizione,1)),lower( SUBSTRING(descrizione,2))) from articolo limit 10;
+
+-----------------------------------------------------------------------------------------------------------------
+per estrarre nome ,abitabnti superficie ti esttrarre la densita abitativa tra 500 e 10000 :
+
+mysql> select nome , abitanti,superficie from provincia where abitanti/superficie between 500 and 1000;
+
+
+-----------------------------------------------------------------------------------------------------------------
+per visualizzare la le sigle tra "AO"  "MI"  :
+
+ select nome, sigla from provincia where sigla between "AO" and "MI" order by sigla;
+
+-----------------------------------------------------------------------------------------------------------------
+
+estrarre certe sigle  ese ("AO","at","pu","ot","og","fc","bt","kr","vv","wc") da provincia :
+
+select nome, sigla from provincia WHERE sigla IN ("AO","at","pu","ot","og","fc","bt","kr","vv","wc");
+
+-----------------------------------------------------------------------------------------------------------------
+estrarre settore , descrizione  e valore degli articoli con valore inferiore a 50 € o superiore a E2000 non esauriti :
+
+select settore , descrizione from articolo where (quantita >0) and  (quantita*prezzo not between 50 and 2000)  ;
+
+-----------------------------------------------------------------------------------------------------------------
+
+estrarre settore descrizone quantita e prezzo degli articoli del settore ristorativo :
+
+select settore , descrizione, prezzo , quantita  from articolo  where settore="ristorativo";
+
+-----------------------------------------------------------------------------------------------------------------
+
+ESTRARRE DA UNA DESCRIZIONE TITTI GLI ARTICOLI CON LA PAROLA LEGNO :
+
+select settore , descrizione, prezzo , quantita  from articolo where descrizione LIKE "%Legno%";
+
+-----------------------------------------------------------------------------------------------------------------
+
+ESTRARRE SETTORE, DESCRIZIONE QUANTITA E PREZZO DELGI ARTICOLI LA CUI DESCRIZONE CONTIENE LE PAROLE "LEGNO" E "SCALPELLO " :
+
+select settore , descrizione, prezzo , quantita  from articolo where descrizione LIKE "%Legno%" and descrizione LIKE "%scalpello%" ;
+
+-----------------------------------------------------------------------------------------------------------------
+
+IL Comando "AS"  CORRRISPONDE ALL'ALIAS DELL OPERAZIONE .
+
+select round (abitanti/superficie,2) AS "densita abitativa" FROM provincia LIMIT 10;
+
+-----------------------------------------------------------------------------------------------------------------
+ESTRARRE NOME E DENSITA ABITATIBA DELLE PROVINCE ORDINANDO PER DESITAT ORDINE DESCESCIENTE
+
+select nome, ROUND(abitanti/superficie) AS densita FROM provincia ORDER BY densita DESC ;
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+estrarre giorno mese anno da tabella utente per ogni persona :
+
+select nome,cognome, extract(day from data_nascita) as "giorno",extract(month from data_nascita) as "mese" , extract(year from data_nascita) as"anno"   from utente;
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+estrarre giorno mese anno (numerici), cine del guirbi dekka settunana e nome del mese della datadi nascita degli utenti
+
+
+select nome,cognome, extract(day from data_nascita) as "giorno",extract(month from data_nascita) as "mese" , extract(year from data_nascita) as"anno" ,monthname(data_nascita) as "mese_lettere", dayname(data_nascita) as"giorni" from utente;
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+estrarre giorno mese anno (numerici), cine del guirbi dekka settunana e nome del mese della datadi nascita degli utenti NATI SOLO IN PRIMAVERA!
+
+select nome,cognome, extract(day from data_nascita) as "giorno", extract(month from data_nascita) as "mese" , extract(year from data_nascita) as"anno" ,monthname(data_nascita) as "mese_lettere" , dayname(data_nascita) as"giorni" from utente where (month(data_nascita) =3 AND DAY(data_nascita)>=21) OR (month(data_nascita)=6 and day(data_nascita)<=20) OR(month(data_nascita) between 4 and 5);
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+data formato italiano
+
+A DUE CIFRE NELL ANNO
+ select nome,cognome,data_nascita , date_format(data_nascita, "%d,/%m/%y")as "formato italiano" from utente ;
+ A 4 CIFRE NELL ANNO
+
+ select nome,cognome,data_nascita , date_format(data_nascita, "%d/%m/%Y")as "formato italiano" from utente ;
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+estrarre la data di nascita dalla tabella di utente 
+
+select nome,cognome, timestampdiff(YEAR,data_nascita,CURDATE()) AS AGE  from utente ;
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
