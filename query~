@@ -140,77 +140,65 @@ select nome,cognome, timestampdiff(YEAR,data_nascita,CURDATE()) AS AGE  from ute
 
 -----------------------------------------------------------------------------------------------------------------
 
+trovare i login degli utenti
+
+select login from utente
 
 
 
 -----------------------------------------------------------------------------------------------------------------
 
+metodo per trovare le password a mano negli utenti 
+
+select id FROM utente WHERE login= 'apple43' AND password = md5('1643');
 
 
 
 
 -----------------------------------------------------------------------------------------------------------------
+desc articolo;
+  descrive  la tabella ariticolo ,
 
+
+-----------------------------------------------------------------------------------------------------------------
+select count(id)from articolo ;
+
+conta quanti id ci sono dentro la tabella articolo . 
 
 
 
 
 -----------------------------------------------------------------------------------------------------------------
+quanti tipi di articolo ci sono nel magaziono?
 
 
+select count(*)from articolo ;
 
+-----------------------------------------------------------------------------------------------------------------
+estrarre la data dei nascita dell utente piu giovane :
+
+
+select max(data_nascita) from utente;
 
 
 -----------------------------------------------------------------------------------------------------------------
 
+calcolare ul valore totale del magaziono:
 
-
-
-
------------------------------------------------------------------------------------------------------------------
-
-
-
+ select SUM(prezzo*quantita) from articolo;
 
 
 -----------------------------------------------------------------------------------------------------------------
+calcolare superficie totale, numero di abitanti ,numero comuni d italia :
 
 
-
-
------------------------------------------------------------------------------------------------------------------
-
-
-
-
+ select sum(abitanti),sum(superficie),sum(comuni) from provincia ;
 
 -----------------------------------------------------------------------------------------------------------------
+calcolare  superficie media e deviazione standard , abitanti..comuni..delle provincie,scrivere i risultati come [media] +-[deviazione]:
 
 
-
-
-
------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
------------------------------------------------------------------------------------------------------------------
-
-
-
-
------------------------------------------------------------------------------------------------------------------
+select concat(ROUND(avg(superficie),2)," +-",ROUND(std(superficie)),2) AS "superficie",concat(ROUND(avg(abitanti),2)," +-",ROUND(std(abitanti)),2)AS "ABITANTI" ,concat(ROUND(avg(comuni),2)," +-",ROUND(std(comuni)),2) AS "comuni"  from provincia ;
 
 
 
@@ -218,8 +206,49 @@ select nome,cognome, timestampdiff(YEAR,data_nascita,CURDATE()) AS AGE  from ute
 
 -----------------------------------------------------------------------------------------------------------------
 
+estrarre la lista delle regione :
+
+ select GROUP_CONCAT(nome) from regione;
 
 
+-----------------------------------------------------------------------------------------------------------------
+
+
+strerre lista nomi delle regioni in ordine alfabetico :
+
+
+select GROUP_CONCAT(nome ORDER BY nome) from regione ;
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+estrarre lista nomi regioni con separatore   | :
+
+select GROUP_CONCAT(nome ORDER BY nome separator "|") from regione ;
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+ESTRARRE  lista di tutti i settori del magazino :
+
+ 
+
+select  GROUP_CONCAT(DISTINCT settore) from articolo;
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+estrarre lalista degli utenti :nome,cognome, data di nascita:
+
+
+select group_concat(cognome,nome,data_nascita separator " \n  ") from utente;
 
 
 -----------------------------------------------------------------------------------------------------------------
