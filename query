@@ -253,9 +253,115 @@ select group_concat(cognome,nome,data_nascita separator " \n  ") from utente;
 
 -----------------------------------------------------------------------------------------------------------------
 
+creare una nuova tabella :
+
+create table giocatore (id int not null AUTO_INCREMENT primary key , 
+nome varchar (255) not null ,
+cognome varchar(255) not null,
+ ...inserire tutti i campi e chiudere con );
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+inseirire un giocatore nella tabella:
+
+INSERT INTO giocatore VALUES(NULL,"alessandro","delpiero","1974-11-09",1.74,74,"M","Italia");
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+creare  tabella squadra :
+
+
+
+INSERT INTO  squadra  VALUES(NULL,"Juventus","Juventus stadium","Torino",1897,"33","Massimo allegri","Agnelli");
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+vedere tabella squadra:
+
+
+ select* from squadra\G ;
+
+il comando \G fa vedere la tabella  campo x capo
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+inserire un nuovo nome nella tabella utenti :
+
+
+
+INSERT INTO utente(cognome,data_nascita,nome) VALUES("Bertola","1973-04-09","Marco");
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+inserire una persona nella tabella alievo 
+
+INSERT INTO allievo(cognome,nome,data_nascita) VALUES("tr","gt","1990-01-06");
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+vedere dentro la tabella alievo :
+
+
+ select* from allievo ;
 
 
 
 
 -----------------------------------------------------------------------------------------------------------------
 
+inserire o modificare un campo sulla tabella alievo md5 per mettere la password criptata:
+
+UPDATE allievo set login="nome login",password=MD5("passord") WHERE id=4;
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+vedere la tabella allievo:
+
+
+ select * from allievo ;
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+modificare data :
+
+
+UPDATE allievo set data_nascita="1999-06-06" wHERE id=4;
+
+-----------------------------------------------------------------------------------------------------------------
+diminuire e aumentare peso giocatore :
+
+
+ UPDATE giocatore set altezza=(altezza -0.01),peso=(peso +75) wHERE id=8;
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------
