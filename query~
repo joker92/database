@@ -344,7 +344,10 @@ modificare data :
 UPDATE allievo set data_nascita="1999-06-06" wHERE id=4;
 
 -----------------------------------------------------------------------------------------------------------------
+diminuire e aumentare peso giocatore :
 
+
+ UPDATE giocatore set altezza=(altezza -0.01),peso=(peso +75) wHERE id=8;
 
 
 
