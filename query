@@ -349,13 +349,6 @@ diminuire e aumentare peso giocatore :
 
  UPDATE giocatore set altezza=(altezza -0.01),peso=(peso +75) wHERE id=8;
 
-
-
-
-
-
-
-
 -----------------------------------------------------------------------------------------------------------------
 
 
@@ -373,31 +366,44 @@ estrarre dati di provincie e regioni di appartenenza nome regione, provincia sig
 select  regione.nome as regine,provincia.nome as provincia, provincia.sigla as sigla,provincia.abitanti as abitanti,provincia.superficie as superficie, provincia.comuni as comuni from regione join provincia on provincia.regione=regione.id;
 
 -----------------------------------------------------------------------------------------------------------------
+assegnare il proprio giocatore alla loro squadra esempio del piero su juve:
+
+update giocatore set squadra=4 where id=8;
+
+
+-----------------------------------------------------------------------------------------------------------------
+estrarre squiadre e giocatori assegnati :
+
+
+select squadra.nome,giocatore.nome,giocatore.cognome,giocatore.altezza,giocatore.peso from squadra join giocatore on giocatore.squadra=squadra.id;
 
 
 
 -----------------------------------------------------------------------------------------------------------------
+visualizza tutti i giocatori anche quelli che non hanno una squadra di appartenenza:
 
 
-
------------------------------------------------------------------------------------------------------------------
-
-
-
-
------------------------------------------------------------------------------------------------------------------
-
-
+ select squadra.nome,giocatore.nome,giocatore.cognome,giocatore.altezza,giocatore.peso from squadra LEFT join giocatore on giocatore.squadra=squadra.id;
 
 
 -----------------------------------------------------------------------------------------------------------------
 
+mostrare squadra citta nome e cognome del giocatore di appartenenza :
 
+select squadra.nome,squadra.citta,giocatore.nome,giocatore.cognome from squadra left join giocatore on giocatore.squadra=squadra.id ;
+
+-----------------------------------------------------------------------------------------------------------------
+
+isciversi ad un corso :
+
+insert into iscrizione values(NULL,2,4,"2015-12-06",NULL);
 
 
 -----------------------------------------------------------------------------------------------------------------
 
+estrarre la lista delle iscrizioni :	
 
+ select corso.titolo , allievo.cognome , allievo.nome , iscrizione.data_iscrizione from iscrizione join corso on iscrizione.corso =corso.id join allievo on iscrizione.allievo =allievo.id order by 1,2;
 
 
 -----------------------------------------------------------------------------------------------------------------
