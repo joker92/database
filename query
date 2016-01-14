@@ -407,15 +407,22 @@ estrarre la lista delle iscrizioni :
 
 
 -----------------------------------------------------------------------------------------------------------------
+estrarre la lista delle stazioni e dei rispettivi tornelli :
 
 
-
------------------------------------------------------------------------------------------------------------------
-
-
+select stazione.nome , tornello.numero from stazione join tornello on tornello.stazione =stazione.id;
 
 -----------------------------------------------------------------------------------------------------------------
+estrarre cognome , nome , date di validita degli abbonamenti :
 
+
+
+select utente.cognome , utente.nome, abbonamento.dal , abbonamento.al from utente join abbonamento on abbonamento.utente=utente.id;
+
+-----------------------------------------------------------------------------------------------------------------
+controllo dell abbonamento  valido 
+
+select count(*) FROM abbonamento WHERE abbonamento.id=2 and "2014-11-10" between dal and al ;
 
 
 
