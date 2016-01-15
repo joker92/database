@@ -428,61 +428,110 @@ select count(*) FROM abbonamento WHERE abbonamento.id=2 and "2014-11-10" between
 
 -----------------------------------------------------------------------------------------------------------------
 
+quanti accessi in totale ?:
+
+ select count(*) from accesso;
+
+-----------------------------------------------------------------------------------------------------------------
+quanti accessi validi :
+
+
+select count(*) from accesso where esito=1;
+
+
+
+SELECT count(*), sum(esito) from accesso ;
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+accessi validi con percentuale .
+
+
+SELECT count(*), sum(esito) , sum(esito)/100*sum(esito)/count(*) from accesso ;
+
+
+-----------------------------------------------------------------------------------------------------------------
+quanti accessi da dalla stazione 18 dicembre :
+
+
+
+select count(*) from accesso  join tornello on accesso.tornello =tornello.id where tornello.stazione=12;
 
 
 
 -----------------------------------------------------------------------------------------------------------------
 
+contare gli articoli per settore :
 
+
+SELECT settore , count(settore) FROM articolo group by settore;
+
+
+-----------------------------------------------------------------------------------------------------------------
+ contare gli articoli per settore .calcolare anche il valore :
+
+select settore , round(sum(quantita*prezzo ),2 ) AS valore , count(*) AS articoli FROM articolo GROUP BY settore ORDER BY articoli;
 
 
 -----------------------------------------------------------------------------------------------------------------
 
+contare gli articoli per settore e calcolare il valore e il valore medio  :
 
 
-
------------------------------------------------------------------------------------------------------------------
-
-
-
+ select settore , count(*) AS articoli , round(sum(quantita*prezzo)) as valore , round(sum(quantita*prezzo)/count(*)) as media from articolo GROUP BY settore ;
 
 -----------------------------------------------------------------------------------------------------------------
 
+calcolare :
+numero provincie
+comuni 
+numero comuni 
+superficie  di ogni regione :
 
 
-
------------------------------------------------------------------------------------------------------------------
-
-
-
-
------------------------------------------------------------------------------------------------------------------
-
-
-
-
------------------------------------------------------------------------------------------------------------------
-
-
-
-
------------------------------------------------------------------------------------------------------------------
+ select  regione.nome as regione, count(*) as  provincia , sum(provincia.abitanti) as abitanti,sum(provincia.comuni)as comuni , round(sum(provincia.superficie),2)as superficie from regione join provincia on provincia.regione=regione.id group by regione.id;
 
 
 
 
 -----------------------------------------------------------------------------------------------------------------
 
+calcolare :
+numero provincie
+comuni 
+numero comuni 
+superficie  di ogni regione :
+
+
+-------+ le sigle delle regioini :------------------
+
+
+select  regione.nome as regione, count(*) as  provincia , sum(provincia.abitanti) as abitanti,sum(provincia.comuni)as comuni , round(sum(provincia.superficie),2)as superficie,group_concat(sigla)as sigla from regione join provincia on provincia.regione=regione.id group by regione.id;
+
+-----------------------------------------------------------------------------------------------------------------
+
+-------+ densita  :------------------
+
+ select  regione.nome as regione, count(*) as  provincia , sum(provincia.abitanti) as abitanti,sum(provincia.comuni)as comuni , round(sum(provincia.superficie),2)as superficie,group_concat(sigla)as sigla,round(sum(abitanti),2)/round(sum(superficie),2) as densita from regione join provincia on provincia.regione=regione.id group by regione.id;
+
+-----------------------------------------------------------------------------------------------------------------
+esatrarre lo storico dei passaggi di un utente priportare cognome , stazio e data e ora in ordine temporale  :
+
+ select utente.cognome,stazione.nome ,accesso.dataora from accesso  join tornello on accesso.tornello =tornello.id join stazione on tornello.stazione =stazione.id join abbonamento on accesso.abbonamento =abbonamento.id join utente on abbonamento.utente =utente.id where utente.id=4 order by accesso.dataora;
+
 
 
 
 -----------------------------------------------------------------------------------------------------------------
+per ogni utente estrarre 
+
+numero passaggi:
 
 
 
------------------------------------------------------------------------------------------------------------------
 
-
+ select utente.cognome,stazione.nome ,accesso.dataora from accesso  join tornello on accesso.tornello =tornello.id join stazione on tornello.stazione =stazione.id join abbonamento on accesso.abbonamento =abbonamento.id join utente on abbonamento.utente =utente.id group by utente.id;
 
 -----------------------------------------------------------------------------------------------------------------
 
